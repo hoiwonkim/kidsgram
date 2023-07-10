@@ -1,0 +1,19 @@
+{
+  "name": "kidsgram",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "dev": ""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hoiwonkim/kidsgram-backend.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hoiwonkim/kidsgram-backend/issues"
+  },
+  "homepage": "https://github.com/hoiwonkim/kidsgram-backend#readme"
+}
