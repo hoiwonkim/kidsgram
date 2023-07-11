@@ -35,14 +35,7 @@ This Capstone project aims to build a platform that resembles Instagram. The obj
 <a name="project-stages"></a>
 ## Project Stages
 
-```mermaid
-graph LR;
-    Backend Development --> Web Frontend Development;
-    Web Frontend Development --> App Development;
-    App Development --> Service Deployment;
-
-
-![project phases](https://github.com/YourGitHubUsername/Instaclone-Project/blob/main/Project%20Flowchart.png)
+![project phases](https://github.com/hoiwonkim/kidsgram-backend/blob/master/kidsgram_Project%20Flowchart.png)
 
 The project will progress from backend development to web frontend development, followed by app development (for both iOS and Android), and finally, service deployment. 
 
