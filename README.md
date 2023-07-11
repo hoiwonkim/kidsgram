@@ -49,15 +49,6 @@ The project will progress from backend development to web frontend development, 
 <a name="user-flow-diagram"></a>
 ## User Flow Diagram
 
-```mermaid
-graph TD;
-    Login/SignUp --> User Profile;
-    User Profile --> Follow/Unfollow;
-    Follow/Unfollow --> Search&UploadPhoto;
-    Search and upload photos --> Like & Comment;
-    Likes and Comments --> Notifications;
-    Notification --> MessageExchange;
-
-![User Flow Diagram](https://github.com/YourGitHubUsername/Instaclone-Project/blob/main/User%20Flow%20Diagram.png)
+![User Flow Diagram](https://github.com/hoiwonkim/kidsgram-backend/blob/master/kidsgram_User%20Flow%20Diagram.png)
 
 The following user flow diagram shows the user experience of the Instaclone web application. The process of a user logging in, using functions such as photo search, uploading, liking, commenting, following/unfollowing, sending messages, etc., and logging out is visually expressed.
