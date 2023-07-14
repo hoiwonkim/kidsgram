@@ -1,3 +1,4 @@
+// ./src/users/seeFollowers/seeFollowers.resolvers.ts
 import { User } from ".prisma/client";
 import { CommonResult } from "../../shared/shared.interfaces";
 import { Context, Resolvers } from "../../types";
@@ -29,6 +30,7 @@ const resolvers: Resolvers = {
           .findUnique({ where: { username } })
           .followers({
             cursor: cursor === undefined ? undefined : { username: cursor },
+            skip: cursor === undefined ? 1 : 0,
             take: 20,
           });
 
