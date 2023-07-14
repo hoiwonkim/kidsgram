@@ -1,3 +1,4 @@
+// ./src/comments/createComment/createComment.resolvers.ts
 import pubsub from "../../pubsub";
 import { Comment, Photo } from ".prisma/client";
 import { CommonResult } from "../../shared/shared.interfaces";

@@ -1,3 +1,4 @@
+// ./src/comments/editComment/editComment.resolvers.ts
 import { CommonResult } from "../../shared/shared.interfaces";
 import { Context, Resolvers } from "../../types";
 

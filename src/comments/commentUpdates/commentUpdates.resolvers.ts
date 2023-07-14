@@ -1,3 +1,4 @@
+// ./src/comments/commentUpdates/commentUpdates.resolvers.ts
 import prisma from "../../prisma";
 import pubsub from "../../pubsub";
 import { Comment, Photo, User } from ".prisma/client";

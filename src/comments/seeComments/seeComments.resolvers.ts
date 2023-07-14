@@ -1,3 +1,4 @@
+// ./src/comments/seeComments/seeComments.resolvers.ts
 import { Comment } from ".prisma/client";
 import { CommonResult } from "../../shared/shared.interfaces";
 import { Context, Resolvers } from "../../types";

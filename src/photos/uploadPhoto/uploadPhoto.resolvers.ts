@@ -1,3 +1,4 @@
+// ./src/photos/uploadPhoto/uploadPhoto.resolvers.ts
 import { Photo } from ".prisma/client";
 import { createWriteStream, ReadStream, WriteStream } from "fs";
 import { finished } from "stream/promises";
