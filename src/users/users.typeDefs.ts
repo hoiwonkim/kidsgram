@@ -6,6 +6,15 @@ export default gql`
     user(username: String!): User
   }
 
+  type Mutation {
+    followUser(username: String!): FollowUserResult
+  }
+
+  type FollowUserResult {
+    ok: Boolean!
+    error: String
+  }
+
   type User {
     id: Int!
     name: String
