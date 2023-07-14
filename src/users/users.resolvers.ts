@@ -19,6 +19,12 @@ const resolvers: Resolvers = {
     followUser: async (_, { username }, { prisma, loggedInUser }) => {
       // 구현 방법을 사용자가 결정
     },
+    unfollowUser: async (_, { username }, { prisma, loggedInUser }) => {
+      // 구현 방법을 사용자가 결정
+    },
+    deleteAccount: async (_, {}, { prisma, loggedInUser }) => {
+      // 구현 방법을 사용자가 결정
+    },
   },
 
   User: {
