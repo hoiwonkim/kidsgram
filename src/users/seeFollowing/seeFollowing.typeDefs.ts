@@ -1,3 +1,4 @@
+// ./src/users/seeFollowing/seeFollowing.typeDefs.ts
 import { gql } from "apollo-server-core";
 
 export default gql`
