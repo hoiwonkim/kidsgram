@@ -1,3 +1,4 @@
+// ./src/users/seeProfile/seeProfile.typeDefs.ts
 import { gql } from "apollo-server-core";
 
 export default gql`

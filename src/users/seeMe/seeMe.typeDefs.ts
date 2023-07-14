@@ -1,3 +1,4 @@
+// ./src/users/seeMe/seeMe.typeDefs.ts
 import { gql } from "apollo-server-core";
 
 export default gql`
