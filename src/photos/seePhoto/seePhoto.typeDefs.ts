@@ -1,3 +1,4 @@
+// ./src/photos/seePhoto/seePhoto.typeDefs.ts
 import { gql } from "apollo-server-core";
 
 export default gql`

@@ -1,3 +1,4 @@
+// ./src/photos/seeFeed/seeFeed.typeDefs.ts
 import { gql } from "apollo-server-core";
 
 export default gql`
@@ -9,6 +10,6 @@ export default gql`
   }
 
   type Query {
-    seeFeed(cursor: Int): SeeFeedResult!
+    seeFeed(cursor: Int!): SeeFeedResult!
   }
 `;

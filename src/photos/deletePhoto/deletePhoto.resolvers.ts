@@ -1,3 +1,4 @@
+// ./src/photos/deletePhoto/deletePhoto.resolvers.ts
 import { Photo } from ".prisma/client";
 import { CommonResult } from "../../shared/shared.interfaces";
 import { handleDeleteFileFromS3 } from "../../shared/shared.utils";

@@ -1,3 +1,4 @@
+// ./src/photos/seePhotoLikes/seePhotoLikes.resolvers.ts
 import { Like, User } from ".prisma/client";
 import { CommonResult } from "../../shared/shared.interfaces";
 import { Context, Resolvers } from "../../types";

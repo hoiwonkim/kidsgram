@@ -18,10 +18,12 @@ interface UploadPhotoResult extends CommonResult {
 
 const resolvers: Resolvers = {
   Mutation: {
-    uploadPhoto: async (_, { photo, caption }: UploadPhotoArgs, { prisma, loggedInUser, handleCheckLogin }: Context): Promise<UploadPhotoResult> => {
-      try {
-        handleCheckLogin(loggedInUser);
+    uploadPhoto: async (_, { photo, caption }: UploadPhotoArgs, { prisma, loggedInUser }: Context): Promise<UploadPhotoResult> => {
+      if (!loggedInUser) {
+        throw new Error("로그인을 먼저 진행해주세요.");
+      }
 
+      try {
         let photoUrl: string = "";
 
         // 개발 환경에서 파일 업로드
@@ -40,12 +42,18 @@ const resolvers: Resolvers = {
           photoUrl = await handleUploadFileToS3(photo, "photos", loggedInUser?.username as string);
         }
 
+        let connectOrCreateData;
+
+        if (caption) {
+          connectOrCreateData = handleExtractHashtags(caption);
+        }
+
         const createdPhoto: Photo = await prisma.photo.create({
           data: {
             photoUrl,
             caption,
             user: { connect: { username: loggedInUser?.username } },
-            hashtags: { connectOrCreate: caption === undefined ? undefined : handleExtractHashtags(caption) },
+            hashtags: connectOrCreateData ? { connectOrCreate: connectOrCreateData } : undefined,
           },
         });
         return { ok: true, message: "사진 업로드에 성공하였습니다.", photo: createdPhoto };

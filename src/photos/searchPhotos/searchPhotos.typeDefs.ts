@@ -1,3 +1,4 @@
+// ./src/photos/searchPhotos/searchPhotos.typeDefs.ts
 import { gql } from "apollo-server-core";
 
 export default gql`
@@ -8,6 +9,6 @@ export default gql`
   }
 
   type Query {
-    searchPhotos(keyword: String!, cursor: Int): SearchPhotosResult!
+    searchPhotos(keyword: String!, cursor: Int!): SearchPhotosResult!
   }
 `;

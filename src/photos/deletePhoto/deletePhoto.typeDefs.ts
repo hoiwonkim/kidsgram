@@ -1,3 +1,4 @@
+// ./src/photos/deletePhoto/deletePhoto.typeDefs.ts
 import { gql } from "apollo-server-core";
 
 export default gql`

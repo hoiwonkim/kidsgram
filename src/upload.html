@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>File Upload</title>
+</head>
+<body>
+  <input type="file" id="fileInput" />
+  <button onClick="uploadFile()">Upload</button>
+  <script src="https://unpkg.com//dist/axios.min.js"></script>
+  <script>
+    async function uploadFile() {
+      const fileInput = document.getElementById("fileInput");
+      const file = fileInput.files[0];
+
+      const formData = new FormData();
+      formData.append("operations", JSON.stringify({
+        query: "mutation ($file: Upload) { uploadPhoto(file: $file) { success, url } }",
+        variables: { file: null }
+      }));
+      formData.append("map", JSON.stringify({ "0": ["variables.file"] }));
+      formData.append("0", file);
+
+      try {
+        const response = await axios.post("http://localhost:4000/graphql", formData, {
+          headers: {
+            "Content-Type": "multipart/form-data"
+          }
+        });
+        
+        console.log(response.data);
+      } catch (error) {
+        console.error("File upload error:", error.message);
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,3 +1,4 @@
+// ./src/photos/seePhotoLikes/seePhotoLikes.typeDefs.ts
 import { gql } from "apollo-server-core";
 
 export default gql`
@@ -8,7 +9,6 @@ export default gql`
   }
 
   type Query {
-    seePhotoLikes(photoId: Int!, cursor: String): SeePhotoLikesResult!
+    seePhotoLikes(photoId: Int!, cursor: Int): SeePhotoLikesResult!
   }
 `;
-
