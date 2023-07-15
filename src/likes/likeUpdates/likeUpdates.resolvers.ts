@@ -1,7 +1,9 @@
+// ./src/likes/likeUpdates/likeUpdates.resolvers.ts
 import prisma from "../../prisma";
 import pubsub from "../../pubsub";
 import { Like, Photo, User } from ".prisma/client";
 import { withFilter } from "graphql-subscriptions";
+import { Context } from "../../types";
 
 interface LikeUpdatesPayload {
   likeUpdates: Like;
@@ -11,14 +13,10 @@ interface LikeUpdatesArgs {
   photoId: number;
 }
 
-interface LikeUpdatesContext {
-  loggedInUser?: User;
-}
-
 const resolvers = {
   Subscription: {
     likeUpdates: {
-      subscribe: async (parent: any, args: LikeUpdatesArgs, context: LikeUpdatesContext, info: any) => {
+      subscribe: async (parent: any, args: LikeUpdatesArgs, context: Context, info: any) => {
         const foundPhoto: Photo | null = await prisma.photo.findFirst({
           where: { id: args.photoId, userId: context.loggedInUser?.id },
         });
