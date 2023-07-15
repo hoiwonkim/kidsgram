@@ -1,3 +1,4 @@
+// ./src/rooms/seeRoom/seeRoom.typeDefs.ts
 import { gql } from "apollo-server-core";
 
 export default gql`

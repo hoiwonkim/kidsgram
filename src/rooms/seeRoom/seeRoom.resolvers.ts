@@ -1,3 +1,4 @@
+// ./src/rooms/seeRoom/seeRoom.resolvers.ts
 import { Room } from ".prisma/client";
 import { CommonResult } from "../../shared/shared.interfaces";
 import { Context, Resolvers } from "../../types";

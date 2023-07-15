@@ -1,3 +1,4 @@
+// ./src/rooms/rooms.resolvers.ts
 import { Message, Room } from ".prisma/client";
 import { Context, Resolvers } from "../types";
 
