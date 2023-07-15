@@ -1,3 +1,4 @@
+// ./src/shared/shared.interfaces.ts
 import { ReadStream } from "fs";
 
 export interface CommonResult {

@@ -1,3 +1,4 @@
+// ./src/users/users.utils.ts
 import jwt from "jsonwebtoken";
 import prisma from "../prisma";
 import { User } from ".prisma/client";

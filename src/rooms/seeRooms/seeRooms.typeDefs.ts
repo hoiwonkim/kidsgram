@@ -1,7 +1,7 @@
 // ./src/rooms/seeRooms/seeRooms.typeDefs.ts
 import { gql } from "apollo-server-core";
 
-export default gql`
+const typeDefs = gql`
   type SeeRoomsResult {
     ok: Boolean!
     message: String!
@@ -12,3 +12,5 @@ export default gql`
     seeRooms: SeeRoomsResult!
   }
 `;
+
+export default typeDefs;

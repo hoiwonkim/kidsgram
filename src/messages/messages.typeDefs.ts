@@ -1,4 +1,19 @@
 // ./src/messages/messages.typeDefs.ts
+// import { gql } from "apollo-server-core";
+
+// export default gql`
+//   type Message {
+//     id: Int!
+//     text: String!
+//     read: Boolean!
+//     user: User!
+//     room: Room!
+//     createdAt: String!
+//     updatedAt: String!
+//   }
+// `;
+
+// ./src/messages/messages.typeDefs.ts
 import { gql } from "apollo-server-core";
 
 export default gql`
@@ -8,6 +23,13 @@ export default gql`
     read: Boolean!
     user: User!
     room: Room!
+    createdAt: String!
+    updatedAt: String!
+  }
+  type Room {
+    id: Int!
+    users: [User] 
+    messages: [Message] 
     createdAt: String!
     updatedAt: String!
   }

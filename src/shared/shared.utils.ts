@@ -1,16 +1,21 @@
+// ./src/shared/shared.utils.ts
 import AWS from "aws-sdk";
 import { ReadStream } from "fs";
 import { AvatarFile } from "./shared.interfaces";
 
 const s3: AWS.S3 = new AWS.S3({
   credentials: {
-    accessKeyId: process.env.AWS_ACCESS_KEY_ID as string,
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY as string,
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID ?? "",
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY ?? "",
   },
 });
 
 export const handleUploadFileToS3 = async (uploadedFile: any, foldername: string, username: string): Promise<string> => {
   try {
+    if (!uploadedFile || !uploadedFile.file) {
+      throw new Error("No uploaded file is provided.");
+    }
+
     const { filename, createReadStream }: AvatarFile = uploadedFile.file;
     const newFilename: string = `${Date.now()}-${filename}`;
     const readStream: ReadStream = createReadStream();
@@ -22,9 +27,10 @@ export const handleUploadFileToS3 = async (uploadedFile: any, foldername: string
         ACL: "public-read-write",
       })
       .promise();
+  
     return Location;
   } catch (error) {
-    console.log("handleUploadFileToS3 error");
+    console.log("handleUploadFileToS3 error:", error);
     return "";
   }
 };
@@ -40,6 +46,6 @@ export const handleDeleteFileFromS3 = async (fileUrl: string): Promise<void> => 
       })
       .promise();
   } catch (error) {
-    console.log("handleDeleteFileFromS3 error");
+    console.log("handleDeleteFileFromS3 error:", error);
   }
 };
