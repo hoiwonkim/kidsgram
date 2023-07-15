@@ -1,3 +1,4 @@
+// ./src/messages/sendMessage/sendMessage.typeDefs.ts
 import { gql } from "apollo-server-core";
 
 export default gql`

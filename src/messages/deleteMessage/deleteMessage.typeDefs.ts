@@ -1,3 +1,4 @@
+// ./src/messages/deleteMessage/deleteMessage.typeDefs.ts
 import { gql } from "apollo-server-core";
 
 export default gql`

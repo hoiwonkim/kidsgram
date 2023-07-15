@@ -1,3 +1,4 @@
+// ./src/messages/readMessage/readMessage.resolvers.ts
 import { Message } from ".prisma/client";
 import { CommonResult } from "../../shared/shared.interfaces";
 import { Context, Resolvers } from "../../types";

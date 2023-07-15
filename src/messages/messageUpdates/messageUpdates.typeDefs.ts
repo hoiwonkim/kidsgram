@@ -1,3 +1,4 @@
+// ./src/messages/messageUpdates/messageUpdates.typeDefs.ts
 import { gql } from "apollo-server-core";
 
 export default gql`

@@ -1,3 +1,4 @@
+// ./src/messages/messageUpdates/messageUpdates.resolvers.ts
 import prisma from "../../prisma";
 import pubsub from "../../pubsub";
 import { withFilter } from "graphql-subscriptions";

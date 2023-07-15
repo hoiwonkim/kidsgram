@@ -1,3 +1,4 @@
+// ./src/messages/sendMessage/sendMessage.resolvers.ts
 import pubsub from "../../pubsub";
 import { Message, Room, User } from ".prisma/client";
 import { CommonResult } from "../../shared/shared.interfaces";
@@ -11,6 +12,7 @@ interface SendMessageArgs {
 
 interface SendMessageResult extends CommonResult {
   room?: Room;
+  id?: number;
 }
 
 const resolvers: Resolvers = {
@@ -45,7 +47,7 @@ const resolvers: Resolvers = {
             include: { user: true, room: true },
           });
           pubsub.publish("MESSAGE_UPDATES", { messageUpdates: createdMessage });
-          return { ok: true, message: "메시지 전송에 성공하였습니다.", id: createdMessage.id };
+          return { ok: true, message: "메시지 전송에 성공하였습니다.", id: createdMessage.id, room: createdRoom };
         }
 
         if (roomId && userId === undefined) {
@@ -64,7 +66,7 @@ const resolvers: Resolvers = {
             include: { user: true, room: true },
           });
           pubsub.publish("MESSAGE_UPDATES", { messageUpdates: createdMessage });
-          return { ok: true, message: "메시지 전송에 성공하였습니다.", id: createdMessage.id };
+          return { ok: true, message: "메시지 전송에 성공하였습니다.", id: createdMessage.id, room: createdMessage.room };
         }
 
         return { ok: true, message: "메시지 전송에 성공하였습니다." };
