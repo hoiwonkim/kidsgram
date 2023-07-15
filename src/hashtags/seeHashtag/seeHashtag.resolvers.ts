@@ -1,3 +1,4 @@
+// ./src/hashtags/seeHashtag/seeHashtag.resolvers.ts
 import { Hashtag } from ".prisma/client";
 import { CommonResult } from "../../shared/shared.interfaces";
 import { Context, Resolvers } from "../../types";
