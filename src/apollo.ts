@@ -1,77 +1,102 @@
-// ./src/apollo.ts
-// import { ApolloClient, InMemoryCache } from '@apollo/client';
-// import { createUploadLink } from 'apollo-upload-client';
-// import { setContext } from '@apollo/client/link/context';
+import { onError } from "@apollo/client/link/error";
+import { WebSocketLink } from "@apollo/client/link/ws";
+import { createUploadLink } from "apollo-upload-client";
+import { setContext } from "@apollo/client/link/context";
+import { getMainDefinition } from "@apollo/client/utilities";
+import { FragmentDefinitionNode, OperationDefinitionNode } from "graphql";
+import { ApolloClient, ApolloLink, createHttpLink, GraphQLRequest, InMemoryCache, makeVar, NormalizedCacheObject, split } from "@apollo/client";
 
-// const authLink = setContext((_, { headers }) => {
-//   const token = localStorage.getItem('accessToken');
+const TOKEN: string = "TOKEN";
+const DARK_MODE: string = "DARK_MODE";
 
-//   return {
-//     headers: {
-//       ...headers,
-//       authorization: token ? `Bearer ${token}` : '',
-//     },
-//   };
-// });
+export const isLoggedInVar = makeVar<boolean>(Boolean(localStorage.getItem(TOKEN)));
+export const isDarkModeVar = makeVar<boolean>(Boolean(localStorage.getItem(DARK_MODE) === "true"));
 
-// const uploadLink = createUploadLink({
-//   uri: 'http://localhost:4000/graphql',
-// });
+export const handleLogin = (token: string): void => {
+  localStorage.setItem(TOKEN, token);
+  isLoggedInVar(true);
+};
 
-// const client = new ApolloClient({
-//   link: authLink.concat(uploadLink),
-//   cache: new InMemoryCache(),
-// });
+export const handleLogout = (client: ApolloClient<object>): void => {
+  client.clearStore();
+  localStorage.removeItem(TOKEN);
+  isLoggedInVar(false);
+};
 
-// export default client;
+export const handleEnableDarkMode = (): void => {
+  localStorage.setItem(DARK_MODE, "true");
+  isDarkModeVar(true);
+};
 
+export const handleDisableDarkMode = (): void => {
+  localStorage.setItem(DARK_MODE, "false");
+  isDarkModeVar(false);
+};
 
-
-
-// ./src/apollo.ts
-import { ApolloClient, InMemoryCache, split } from '@apollo/client';
-import { createUploadLink } from 'apollo-upload-client';
-import { setContext } from '@apollo/client/link/context';
-import { WebSocketLink } from '@apollo/client/link/ws';
-import { getMainDefinition } from '@apollo/client/utilities';
-
-const authLink = setContext((_, { headers }) => {
-  const token = localStorage.getItem('accessToken');
-
-  return {
-    headers: {
-      ...headers,
-      authorization: token ? `Bearer ${token}` : '',
-    },
-  };
+const httpLink: ApolloLink = createHttpLink({
+  uri: "http://localhost:4000/graphql",
 });
 
-const httpLink = createUploadLink({
-  uri: 'http://localhost:4000/graphql',
+const authLink: ApolloLink = setContext((operation: GraphQLRequest, prevContext) => {
+  const token: string | null = localStorage.getItem(TOKEN);
+  return { headers: { ...prevContext.headers, token } };
 });
 
-const wsLink = new WebSocketLink({
-  uri: 'ws://localhost:4000/graphql',
+const errorLink: ApolloLink = onError(({ graphQLErrors, networkError }) => {
+  if (graphQLErrors) {
+    console.log(`GraphQL Error`, graphQLErrors);
+  }
+  if (networkError) {
+    console.log(`Network Error`, networkError);
+  }
+});
+
+const uploadHttpLink: ApolloLink = createUploadLink({
+  uri: process.env.NODE_ENV === "production" ? "https://instagram-gw.herokuapp.com/graphql" : "http://localhost:4000/graphql",
+});
+
+const uploadHttpLinks: ApolloLink = authLink.concat(errorLink).concat(uploadHttpLink);
+
+const wsLink: WebSocketLink = new WebSocketLink({
+  uri: process.env.NODE_ENV === "production" ? "wss://instagram-gw.herokuapp.com/graphql" : "ws://localhost:4000/graphql",
   options: {
     reconnect: true,
-    connectionParams: {
-      token: localStorage.getItem('accessToken'), // 인증 토큰을 저장하는 로컬스토리지 키를 사용하십시오.
-    },
+    connectionParams: () => ({
+      token: localStorage.getItem(TOKEN),
+    }),
   },
 });
 
-const link = split(
+const splitLink: ApolloLink = split(
   ({ query }) => {
-    const { kind, operation } = getMainDefinition(query);
-    return kind === 'OperationDefinition' && operation === 'subscription';
+    const definition: OperationDefinitionNode | FragmentDefinitionNode = getMainDefinition(query);
+    const isSubscription: boolean = definition.kind === "OperationDefinition" && definition.operation === "subscription";
+    return isSubscription;
   },
   wsLink,
-  authLink.concat(httpLink),
+  uploadHttpLinks
 );
 
-const client = new ApolloClient({
-  link,
-  cache: new InMemoryCache(),
+const client: ApolloClient<NormalizedCacheObject> = new ApolloClient({
+  link: splitLink,
+  cache: new InMemoryCache({
+    typePolicies: {
+      Query: {
+        fields: {
+          seeFeed: {
+            keyArgs: false,
+            merge(existing, incoming) {
+              if (existing) {
+                const result = { ...existing, ...incoming, photos: [...existing.photos, ...incoming.photos] };
+                return result;
+              }
+              return incoming;
+            },
+          },
+        },
+      },
+    },
+  }),
 });
 
 export default client;

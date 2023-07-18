@@ -1,67 +1,21 @@
-# Capstone Project: Kidsgram
-
-This Capstone project aims to build a platform that resembles Instagram. The objective is to provide a seamless user experience for photo sharing and messaging, with a focus on developing both the front-end and back-end systems to support these interactions.
-
 <div align="center">
   <a href="https://instagram-gw.netlify.app">
     <img height="130" src="./previews/instagram_logo.png" />
     <br /><br />
-    <a display="block" href="https://instagram-gw.netlify.app">https://kidsgram.netlify.app</a>
+    <a display="block" href="https://instagram-gw.netlify.app">https://instagram-gw.netlify.app</a>
     <br /><br />
     <img height="700" src="./previews/1.gif" />
   </a>
 </div>
 
-## Table of Contents
-1. [Project Objectives](#project-objectives)
-2. [Technologies Used](#technologies-used)
-3. [User Features](#user-features)
-4. [Project Stages](#project-stages)
-5. [User Flow Diagram](#user-flow-diagram)
-6. [Built with](#built-with)
-7. [Project](#project)
-8. [Pages](#pages)
-9. [Features](#features)
-10. [License](#license)
+## Table of contents
 
-<a name="project-objectives"></a>
-## Project Objectives
-- Enable seamless interaction between users for photo sharing and messaging
-- Implement user authentication, profile management, follow/unfollow, photo feed, and message transmission functionality
-- Design and build efficient back-end and front-end systems
-- Develop the app with cross-platform compatibility for both iOS and Android
+- 🔥 [Built with](#built-with)
+- 🌈 [Project](#project)
+- 📑 [Pages](#pages)
+- ⚙ [Features](#features)
+- 📝 [License](#license)
 
-<a name="technologies-used"></a>
-## Technologies Used
-- Frontend: React, GraphQL, TypeScript, Apollo, Styled Components
-- Backend: Apollo Server, GraphQL, Prisma Studio, Prisma Migrate, Prisma Client
-- App Development: React Native, Expo, React Navigation
-
-<a name="user-features"></a>
-## User Features
-1. Sign up and log in
-2. Follow/unfollow management
-3. Search and upload photos
-4. Photo like and comment functionality
-5. Personal feed and photo feed
-6. Message exchange between users
-7. Account settings and profile management
-
-<a name="project-stages"></a>
-## Project Stages
-
-![project phases](https://github.com/hoiwonkim/kidsgram-backend/blob/master/kidsgram_Project%20Flowchart.png)
-
-The project will progress from backend development to web frontend development, followed by app development (for both iOS and Android), and finally, service deployment. 
-
-<a name="user-flow-diagram"></a>
-## User Flow Diagram
-
-![User Flow Diagram](https://github.com/hoiwonkim/kidsgram-backend/blob/master/kidsgram_User%20Flow%20Diagram.png)
-
-The following user flow diagram shows the user experience of the Instaclone web application. The process of a user logging in, using functions such as photo search, uploading, liking, commenting, following/unfollowing, sending messages, etc., and logging out is visually expressed.
-
-<a name="built-with"></a>
 ## Built with
 
 ### Front-end
@@ -99,214 +53,209 @@ The following user flow diagram shows the user experience of the Instaclone web 
 - `Heroku`
 - `AWS S3`
 
-<a name="project"></a>
 ## Project
 
-> 1. User registration, login, logout
+> 1. 회원가입, 로그인, 로그아웃
 
-- Users can sign up by entering their email, name, username, and password.
-- When signing up, the entered password is hashed using Bcrypt, and the account information is stored in PostgreSQL.
-- Users can log in by entering their username and password.
-- Upon successful login, a JsonWebToken is received and stored in the local storage.
-- Update local state using Apollo Client and Reactive variables.
-- Updating Reactive variables triggers the update of all queries depending on that variable.
-- When logging out, change the Reactive variables, remove the stored token in local storage, and delete the stored data in the store.
-- <br /><br />
-- <img height="700" src="./previews/2.gif" />
+- 유저는 이메일, 성명, 사용자 이름, 비밀번호를 입력해 회원가입을 할 수 있습니다.
+- 회원가입 시, 입력한 비밀번호는 `Bcrypt`를 통해 해시화되며, 계정 정보는 `PostgreSQL`에 저장됩니다.
+- 유저는 사용자 이름, 비밀번호를 입력해 로그인할 수 있습니다.
+- 성공적으로 로그인 시, `JsonWebToken`을 받게 되고 해당 토큰을 로컬 스토리지에 저장합니다.
+- `Apollo Client`의 `Reactive variables`를 이용해서 local state를 업데이트합니다.
+- `Reactive variables`를 변경함으로써 해당 변수에 의존하는 모든 쿼리의 업데이트가 트리거됩니다.
+- 로그아웃 시, `Reactive variables`를 변경하고, 로컬 스토리지에 저장된 토큰과 스토어에 저장된 데이터를 제거합니다.
+  <br /><br />
+  <img height="700" src="./previews/2.gif" />
 
-> 2. Profile
+> 2. 프로필
 
-- In the profile page, users can view their information, photos, followers, and followings.
-- Followers are a list of users who follow the user, and followings are a list of users followed by the user.
+- 프로필 페이지에서 유저 정보, 사진, 팔로워, 팔로우를 확인할 수 있습니다.
+- 팔로워는 해당 유저를 팔로우하고 있는 유저들의 목록이고, 팔로우는 해당 유저가 팔로우하고 있는 유저들의 목록입니다.
   <br /><br />
   <img height="700" src="./previews/3.gif" />
 
-> 3. Follow and unfollow users
+> 3. 유저 팔로우, 언팔로우
 
-- Users can follow or unfollow other users.
-- When following or unfollowing, the Apollo Client directly modifies the cached field values of both users to update the follower and following lists.
-- Once you follow a user, you can see their uploaded photos on the home page. <br /><br /> <img height="700" src="./previews/4.gif" />
-- Search users and hashtags
-- Search for users with @username (ex: @nasa)
-- Search hashtags with #hashtag (ex: #space)
-- Using React Hook Form, search for users with @name and hashtags with #hashtag.
+- 유저를 팔로우하거나 언팔로우할 수 있습니다.
+- 팔로우하거나 팔로우를 취소하게 되면, `Apollo Client`를 통해 상대방과 자신의 캐시된 필드 값을 직접 수정하여 팔로워와 팔로우 목록을 업데이트합니다.
+- 유저를 팔로우하게 되면, 홈에서 해당 유저가 업로드한 사진들을 볼 수 있습니다.
+  <br /><br />
+  <img height="700" src="./previews/4.gif" />
+
+> 4. 유저 및 해시태그 검색
+
+- **@유저이름** 으로 유저를 검색할 수 있습니다. (ex: @nasa)
+- **#해시태그** 로 해시태그를 검색할 수 있습니다. (ex: #space)
+- `React Hook Form`을 이용해 **@이름** 을 입력 시 유저를, **#해시태그**를 입력 시 해시태그를 검색합니다.
   <br /><br />
   <img height="700" src="./previews/5.gif" />
 
->  4. Search users and hashtags
+> 5. 사진
 
--Search for users with @username (ex: @nasa)
-- Search hashtags with #hashtag (ex: #space)
-- Using React Hook Form, search for users with @name and hashtags with #hashtag.
-  <br /><br />
-  <img height="700" src="./previews/5.gif" />
-  
-> 5. Photos
-
-- Click on a photo to view its details.
-- Animation is applied to the modal window using Framer Motion when it appears and disappears.
-- View the user who uploaded the photo, caption, comments, and likes.
-- View users who liked the photo and follow or unfollow them.
-- Write, edit or delete comments on the photo.
-- The user who uploaded the photo can edit the caption or delete the photo.
+- 사진을 클릭하여 사진 상세정보를 확인할 수 있습니다.
+- `Framer Motion`을 이용해 모달 창이 나타나거나 사라질 때, 애니메이션을 적용하였습니다.
+- 사진을 업로드한 유저, 캡션, 댓글, 좋아요 등을 확인할 수 있습니다.
+- 사진에 좋아요를 누른 유저들을 확인할 수 있고, 해당 유저들을 팔로우하거나 언팔로우할 수 있습니다.
+- 사진에 댓글을 작성하거나 수정 및 삭제할 수 있습니다.
+- 사진을 업로드한 유저는 사진의 캡션을 수정하거나 사진을 삭제할 수 있습니다.
   <br /><br />
   <img height="700" src="./previews/6.gif" />
 
-> 6. Upload photos
- 
-- Users can upload photos by entering an image and caption.
-- In the caption, include @username or #hashtag to mention a user or create a hashtag.
-- The uploaded photo is stored in an AWS S3 bucket.
+> 6. 사진 업로드
+
+- 사진 이미지와 캡션을 입력해 사진을 업로드할 수 있습니다.
+- 캡션에는 **@유저이름** 또는 **#해시태그** 를 입력해, 유저 이름 또는 해시태그를 작성할 수 있습니다.
+- 업로드한 사진은 `AWS S3`의 버킷에 저장됩니다.
   <br /><br />
   <img height="700" src="./previews/7.gif" />
-  
-> 7. Like and unlike photos
 
-- Users can like or unlike photos.
-- By liking or unliking a photo, the Apollo Client directly edits the cached field values of the photo to update the likes and total number of likes.
+> 7. 사진 좋아요, 좋아요 취소
+
+- 사진에 좋아요를 누르거나 좋아요를 취소할 수 있습니다.
+- 좋아요 또는 좋아요 취소를 하게 되면, `Apollo Client`를 통해 해당 사진의 캐시된 필드 값을 직접 수정하여 좋아요와 전체 좋아요 수를 업데이트합니다.
   <br /><br />
   <img height="700" src="./previews/8.gif" />
 
-> 8. Hashtags
+> 8. 해시태그
 
-- Hashtags display all the photos associated with the hashtag.
-- When uploading a photo, a new hashtag is created when #hashtag is entered in the caption.
+- 해시태그는 해당 해시태그가 가지고 있는 전체 사진들을 불러옵니다.
+- 사진 업로드 시, 캡션에 **#해시태그** 를 입력하게 되면, 새로운 해시태그가 생성됩니다.
   <br /><br />
   <img height="700" src="./previews/9.gif" />
 
-> 9. Follow update
+> 9. 팔로우 업데이트
 
-- With GraphQL Subscriptions, users can receive follow updates in real-time when someone follows them.
-- Using PubSub, following an event is published, and the user listening to that event receives a follow update notification.
+- `GraphQL Subscriptions`를 통해 상대방이 자신을 팔로우하게 되면, 실시간으로 팔로우 업데이트 알림을 받을 수 있습니다.
+- `PubSub`을 이용해 팔로우 시, 이벤트를 publish하게 되고, 해당 이벤트를 listen하고 있는 유저는 팔로우 업데이트 알림을 받게 됩니다.
   <br /><br />
   <img height="700" src="./previews/10.gif" />
 
-> 10. Dark mode
+> 10. 다크모드
 
-- Click on the sun or moon to switch between light and dark modes.
-- Use the Styled Components ThemeProvider to set light and dark themes.
-- When switching to dark mode, the dark mode activation status is saved in the local storage, and the local state is updated using Apollo Client and Reactive variables.
+- 해와 달을 클릭해 라이트 모드와 다크 모드를 전환할 수 있습니다.
+- `Styled Components`의 `ThemeProvider`를 이용해 라이트 테마와 다크 테마를 설정합니다.
+- 다크 모드 전환 시, 다크 모드 활성 여부를 로컬 스토리지에 저장하고, `Apollo Client`의 `Reactive variables`를 이용해서 local state를 업데이트합니다.
   <br /><br />
   <img height="700" src="./previews/11.gif" />
-  
-> 11. User registration, login, logout (app)
 
-- Users can sign up by entering their email, name, username, and password.
-- Users can log in by entering their username and password.
-- Upon successful login, a JsonWebToken is received and stored in AsyncStorage.
-- Upon app loading, the token is retrieved from AsyncStorage to verify the login status.
-- When logging out, change the Reactive variables, remove the stored token in AsyncStorage, and delete the stored data in the store.
+> 11. 회원가입, 로그인, 로그아웃 (앱)
+
+- 유저는 이메일, 성명, 사용자 이름, 비밀번호를 입력해 회원가입을 할 수 있습니다.
+- 유저는 사용자 이름, 비밀번호를 입력해 로그인할 수 있습니다.
+- 성공적으로 로그인 시, `JsonWebToken`을 받게 되고 해당 토큰을 `AsyncStorage`에 저장합니다.
+- 앱 로딩 시, `AsyncStorage`로부터 토큰을 가져와 로그인 여부를 확인합니다.
+- 로그아웃 시, `Reactive variables`를 변경하고, `AsyncStorage`에 저장된 토큰과 스토어에 저장된 데이터를 제거합니다.
   <br /><br />
   <img height="700" src="./previews/12.gif" />
   <img height="700" src="./previews/13.gif" />
-  
-> 12. Profile (app)
 
-- In the profile page, users can view their information, photos, followers, and followings.
-- Click on a photo to view its details.
-- View the user who uploaded the photo, caption, comments, likes, etc.
+> 12. 프로필 (앱)
+
+- 프로필 페이지에서 유저 정보, 사진, 팔로워, 팔로우를 확인할 수 있습니다.
+- 사진을 클릭하여 사진 상세정보를 확인할 수 있습니다.
+- 사진을 업로드한 유저, 캡션, 댓글, 좋아요 등을 확인할 수 있습니다.
   <br /><br />
   <img height="700" src="./previews/14.gif" />
   <img height="700" src="./previews/15.gif" />
-  
-> 13. Photo search, photo selection, and photo shooting (app)
 
-- Search for photos with caption (ex: food)
-- Users can select photos from their phone's gallery or upload photos taken through the camera.
-- Set access permissions to the media library using expo-media-library.
-- Configure the camera's type, zoom, ratio, white balance, etc., using expo-camera.
+> 14. 사진 검색, 사진 선택 및 사진 촬영 (앱)
+
+- **캡션** 으로 사진을 검색할 수 있습니다. (ex: food)
+- 유저는 휴대폰 앨범에 있는 사진들을 선택하거나, 사진 촬영을 통해 촬영한 사진을 업로드할 수 있습니다.
+- `expo-media-library`를 통해 미디어 라이브러리에 대한 접근 권한을 설정합니다.
+- `expo-camera`를 통해 카메라의 type, zoom, ratio, whiteBalance등을 설정합니다.
   <br /><br />
   <img height="700" src="./previews/16.gif" />
   <img height="700" src="./previews/17.gif" />
 
-> 14. Miscellaneous
-- Front-end is deployed to Netlify, Back-end is deployed to Heroku.
-- Database is deployed to Heroku PostgreSQL.
-- Generate types and code from the GraphQL Schema using GraphQL Code Generator.
-- Front-end: https://github.com/hoiwonkim/kidsgram-frontend
-- Back-end: https://github.com/hoiwonkim/kidsgram-backend
-- App: https://github.com/hoiwonkim/kidsgram-app
+> 15. 기타
 
-<a name="pages"></a>
+- `Front-end`는 `Netlify`에, `Back-end`는 `Heroku`에 배포하였습니다.
+- `Database`는 `Heroku PostgreSQL`에 배포하였습니다.
+- `GraphQL Code Generator`를 이용해 `GraphQL Schema`로부터 타입 및 코드를 생성하였습니다.
+- `Front-end`: https://github.com/GitHubGW/instagram-frontend
+- `Back-end`: https://github.com/GitHubGW/instagram-backend
+- `App`: https://github.com/GitHubGW/instagram-app
+
 ## Pages
 
 > Root
 
-- Home
-- Login
-- Register
+- 홈
+- 로그인
+- 회원가입
 
 > User
 
-- All users
-- User profile
-- User follow
-- User followers
-- Edit profile
+- 전체 유저
+- 유저 프로필
+- 유저 팔로우
+- 유저 팔로워
+- 프로필 수정
 
 > Photo
 
-- Photo upload
-- Photo details
+- 사진 업로드
+- 사진 상세정보
 
 > Hashtag
 
-- Hashtags
+- 해시태그
 
-<a name="features"></a>
 ## Features
 
 ### 🙎‍♂️ User
 
- - Sign up, delete account
- - Login, log out
- - View profile
- - Follow, unfollow
- - View followers, followings
- - User search
- - Edit profile
- - View all users
- - Follow update
+- [x] 회원가입, 회원탈퇴
+- [x] 로그인, 로그아웃
+- [x] 프로필 보기
+- [x] 팔로우, 언팔로우
+- [x] 팔로워, 팔로우 보기
+- [x] 유저 검색
+- [x] 프로필 수정
+- [x] 전체 유저 보기
+- [x] 팔로우 업데이트
 
 ### 📷 Photo
 
- - View photos
- - View photo likes
- - Upload photos
- - Edit photos
- - Delete photos
- - Search photos
- - View feed
+- [x] 사진 보기
+- [x] 사진 좋아요 보기
+- [x] 사진 업로드
+- [x] 사진 수정
+- [x] 사진 삭제
+- [x] 사진 검색
+- [x] 피드 보기
 
 ### 💬 Comment
- 
- - View comments
- - Create comments
- - Edit comments
- - Delete comments
- - Update comments
+
+- [x] 댓글 보기
+- [x] 댓글 생성
+- [x] 댓글 수정
+- [x] 댓글 삭제
+- [x] 댓글 업데이트
 
 ### #️⃣ Hashtag
- 
- - View hashtags
- - Search hashtags
+
+- [x] 해시태그 보기
+- [x] 해시태그 검색
 
 ### ❤️ Like
- - Like and unlike photos
- - Update likes
+
+- [x] 사진 좋아요, 좋아요 취소
+- [x] 좋아요 업데이트
 
 ### 📨 Room
- 
- - View all chat rooms
- - View chat room
-### ✉️ Message
- 
- - Send messages
- - Read messages
- - Delete messages
- - Update messages
 
-<a name="license"></a>
-### License
+- [x] 전체 채팅방 보기
+- [x] 채팅방 보기
+
+### ✉️ Message
+
+- [x] 메세지 보내기
+- [x] 메세지 읽기
+- [x] 메세지 삭제
+- [x] 메세지 업데이트
+
+## License
 
 MIT
