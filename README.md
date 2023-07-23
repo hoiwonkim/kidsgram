@@ -1,8 +1,8 @@
 <div align="center">
-  <a href="https://instagram-gw.netlify.app">
+  <a href="https://kidsgram.netlify.app">
     <img height="130" src="./previews/instagram_logo.png" />
     <br /><br />
-    <a display="block" href="https://instagram-gw.netlify.app">https://instagram-gw.netlify.app</a>
+    <a display="block" href="https://kidsgram.netlify.app">https://kidsgram.netlify.app</a>
     <br /><br />
     <img height="700" src="./previews/1.gif" />
   </a>
@@ -53,129 +53,133 @@
 - `Heroku`
 - `AWS S3`
 
+## Project Overview
+
+-This project aims to implement the primary features of Instagram, including taking photos, uploading, feeds, searching, liking, following, notifications, and messaging. It encompasses the entire coding of Instagram, including backend, frontend, app, and server. Additionally, the Amazon S3 API is used for storage roles, such as uploading and deleting photos. Technologies used in this project include NodeJS, ES6, Apollo Server, Prisma Client, Prisma Migrate, Prisma Studio, React, Apollo Client, React Hooks, Expo, React Native CLI, React Native, React Navigation, Heroku, and Netlify.
+
 ## Project
 
-> 1. 회원가입, 로그인, 로그아웃
+> 1. Sign up, Log in, Log out
 
-- 유저는 이메일, 성명, 사용자 이름, 비밀번호를 입력해 회원가입을 할 수 있습니다.
-- 회원가입 시, 입력한 비밀번호는 `Bcrypt`를 통해 해시화되며, 계정 정보는 `PostgreSQL`에 저장됩니다.
-- 유저는 사용자 이름, 비밀번호를 입력해 로그인할 수 있습니다.
-- 성공적으로 로그인 시, `JsonWebToken`을 받게 되고 해당 토큰을 로컬 스토리지에 저장합니다.
-- `Apollo Client`의 `Reactive variables`를 이용해서 local state를 업데이트합니다.
-- `Reactive variables`를 변경함으로써 해당 변수에 의존하는 모든 쿼리의 업데이트가 트리거됩니다.
-- 로그아웃 시, `Reactive variables`를 변경하고, 로컬 스토리지에 저장된 토큰과 스토어에 저장된 데이터를 제거합니다.
+- Users can sign up by entering their email, full name, username, and password.
+- Upon registration, the entered password is hashed using Bcrypt, and the account information is stored in PostgreSQL.
+- Users can log in by entering their username and password.
+- Upon successful login, users receive a JsonWebToken, which is then stored in local storage.
+- The local state is updated using Apollo Client's Reactive variables.
+- Updating the Reactive variables triggers an update of all queries that depend on the variable.
+- When logging out, change the Reactive variables, remove the token stored in local storage, and clear the data stored in the store.
   <br /><br />
   <img height="700" src="./previews/2.gif" />
 
-> 2. 프로필
+> 2. Profile
 
-- 프로필 페이지에서 유저 정보, 사진, 팔로워, 팔로우를 확인할 수 있습니다.
-- 팔로워는 해당 유저를 팔로우하고 있는 유저들의 목록이고, 팔로우는 해당 유저가 팔로우하고 있는 유저들의 목록입니다.
+- On the profile page, you can view user information, photos, followers, and followings.
+- Followers are the list of users who follow the target user, while followings are the list of users whom the target user follows.
   <br /><br />
   <img height="700" src="./previews/3.gif" />
 
-> 3. 유저 팔로우, 언팔로우
+> 3. Follow and Unfollow Users
 
-- 유저를 팔로우하거나 언팔로우할 수 있습니다.
-- 팔로우하거나 팔로우를 취소하게 되면, `Apollo Client`를 통해 상대방과 자신의 캐시된 필드 값을 직접 수정하여 팔로워와 팔로우 목록을 업데이트합니다.
-- 유저를 팔로우하게 되면, 홈에서 해당 유저가 업로드한 사진들을 볼 수 있습니다.
+- Users can follow or unfollow other users.
+- Upon following or unfollowing, the Apollo Client is used to directly modify the cached field values for both the target user and oneself, updating the followers and followings lists accordingly.
+- When a user is followed, their uploaded photos become visible on the home page.
   <br /><br />
   <img height="700" src="./previews/4.gif" />
 
-> 4. 유저 및 해시태그 검색
+> 4. Search Users and Hashtags
 
-- **@유저이름** 으로 유저를 검색할 수 있습니다. (ex: @nasa)
-- **#해시태그** 로 해시태그를 검색할 수 있습니다. (ex: #space)
-- `React Hook Form`을 이용해 **@이름** 을 입력 시 유저를, **#해시태그**를 입력 시 해시태그를 검색합니다.
+- Users can be searched using @username (e.g., @nasa).
+- Hashtags can be searched using #hashtag (e.g., #space).
+- Using React Hook Form, users are searched with @username input, and hashtags are searched with #hashtag input.
   <br /><br />
   <img height="700" src="./previews/5.gif" />
 
-> 5. 사진
+> 5. Photos
 
-- 사진을 클릭하여 사진 상세정보를 확인할 수 있습니다.
-- `Framer Motion`을 이용해 모달 창이 나타나거나 사라질 때, 애니메이션을 적용하였습니다.
-- 사진을 업로드한 유저, 캡션, 댓글, 좋아요 등을 확인할 수 있습니다.
-- 사진에 좋아요를 누른 유저들을 확인할 수 있고, 해당 유저들을 팔로우하거나 언팔로우할 수 있습니다.
-- 사진에 댓글을 작성하거나 수정 및 삭제할 수 있습니다.
-- 사진을 업로드한 유저는 사진의 캡션을 수정하거나 사진을 삭제할 수 있습니다.
+- Click on a photo to view its details.
+- Framer Motion is used to apply animations when the modal window appears or disappears.
+- Users can view the uploader, caption, comments, and likes for each photo.
+- Users can see who liked the photo, and follow or unfollow these users.
+- Users can write, edit, or delete comments on photos.
+- The user who uploaded the photo can edit the caption or delete the photo. 
   <br /><br />
   <img height="700" src="./previews/6.gif" />
 
-> 6. 사진 업로드
+> 6. Photo Upload
 
-- 사진 이미지와 캡션을 입력해 사진을 업로드할 수 있습니다.
-- 캡션에는 **@유저이름** 또는 **#해시태그** 를 입력해, 유저 이름 또는 해시태그를 작성할 수 있습니다.
-- 업로드한 사진은 `AWS S3`의 버킷에 저장됩니다.
+- Users can upload photos by selecting an image and entering a caption.
+- In the caption, users can include @username or #hashtag to mention usernames or hashtags.
+- Uploaded photos are saved in an AWS S3 bucket.
   <br /><br />
   <img height="700" src="./previews/7.gif" />
 
-> 7. 사진 좋아요, 좋아요 취소
+> 7. Like and Unlike Photos
 
-- 사진에 좋아요를 누르거나 좋아요를 취소할 수 있습니다.
-- 좋아요 또는 좋아요 취소를 하게 되면, `Apollo Client`를 통해 해당 사진의 캐시된 필드 값을 직접 수정하여 좋아요와 전체 좋아요 수를 업데이트합니다.
+- Users can like or unlike photos.
+- Upon liking or unliking a photo, the Apollo Client is used to directly modify the cached field values of the photo to update the number of likes and total likes. 
   <br /><br />
   <img height="700" src="./previews/8.gif" />
 
-> 8. 해시태그
+> 8. Hashtags
 
-- 해시태그는 해당 해시태그가 가지고 있는 전체 사진들을 불러옵니다.
-- 사진 업로드 시, 캡션에 **#해시태그** 를 입력하게 되면, 새로운 해시태그가 생성됩니다.
+- Hashtags display all photos associated with the particular hashtag.
+- When uploading a photo, if you enter #hashtag in the caption, a new hashtag is created.
   <br /><br />
   <img height="700" src="./previews/9.gif" />
 
-> 9. 팔로우 업데이트
+> 9. Follow Update
 
-- `GraphQL Subscriptions`를 통해 상대방이 자신을 팔로우하게 되면, 실시간으로 팔로우 업데이트 알림을 받을 수 있습니다.
-- `PubSub`을 이용해 팔로우 시, 이벤트를 publish하게 되고, 해당 이벤트를 listen하고 있는 유저는 팔로우 업데이트 알림을 받게 됩니다.
+- With GraphQL Subscriptions, users can receive real-time follow update notifications when someone follows them.
+- Using PubSub, when a user follows another, an event is published, and users listening to that event receive follow update notifications. 
   <br /><br />
   <img height="700" src="./previews/10.gif" />
 
-> 10. 다크모드
+> 10. Dark Mode
 
-- 해와 달을 클릭해 라이트 모드와 다크 모드를 전환할 수 있습니다.
-- `Styled Components`의 `ThemeProvider`를 이용해 라이트 테마와 다크 테마를 설정합니다.
-- 다크 모드 전환 시, 다크 모드 활성 여부를 로컬 스토리지에 저장하고, `Apollo Client`의 `Reactive variables`를 이용해서 local state를 업데이트합니다.
+- Click on the sun and moon icons to toggle between light mode and dark mode.
+- Using Styled Components' ThemeProvider, set up light and dark themes.
+- When switching to dark mode, store the dark mode activation status in local storage, and update the local state using the Apollo Client's Reactive variables.
   <br /><br />
   <img height="700" src="./previews/11.gif" />
 
-> 11. 회원가입, 로그인, 로그아웃 (앱)
+> 11. Sign up, Log in, Log out (App)
 
-- 유저는 이메일, 성명, 사용자 이름, 비밀번호를 입력해 회원가입을 할 수 있습니다.
-- 유저는 사용자 이름, 비밀번호를 입력해 로그인할 수 있습니다.
-- 성공적으로 로그인 시, `JsonWebToken`을 받게 되고 해당 토큰을 `AsyncStorage`에 저장합니다.
-- 앱 로딩 시, `AsyncStorage`로부터 토큰을 가져와 로그인 여부를 확인합니다.
-- 로그아웃 시, `Reactive variables`를 변경하고, `AsyncStorage`에 저장된 토큰과 스토어에 저장된 데이터를 제거합니다.
+- Users can sign up by entering their email, full name, username, and password.
+- Users can log in by entering their username and password.
+- Upon successful login, users receive a JsonWebToken, which is then stored in the AsyncStorage.
+- When the app loads, verify the login status by retrieving the token from AsyncStorage.
+- When logging out, change the Reactive variables, remove the token stored in AsyncStorage, and clear the data stored in the store.
   <br /><br />
   <img height="700" src="./previews/12.gif" />
   <img height="700" src="./previews/13.gif" />
 
-> 12. 프로필 (앱)
+> 12. Profile (App)
 
-- 프로필 페이지에서 유저 정보, 사진, 팔로워, 팔로우를 확인할 수 있습니다.
-- 사진을 클릭하여 사진 상세정보를 확인할 수 있습니다.
-- 사진을 업로드한 유저, 캡션, 댓글, 좋아요 등을 확인할 수 있습니다.
+- On the profile page, you can view user information, photos, followers, and followings.
+- Click on a photo to view its details.
+- Users can view the uploader, caption, comments, and likes for each photo.
   <br /><br />
   <img height="700" src="./previews/14.gif" />
   <img height="700" src="./previews/15.gif" />
 
-> 14. 사진 검색, 사진 선택 및 사진 촬영 (앱)
+> 14. Photo Search, Photo Selection, and Photo Capture (App)
 
-- **캡션** 으로 사진을 검색할 수 있습니다. (ex: food)
-- 유저는 휴대폰 앨범에 있는 사진들을 선택하거나, 사진 촬영을 통해 촬영한 사진을 업로드할 수 있습니다.
-- `expo-media-library`를 통해 미디어 라이브러리에 대한 접근 권한을 설정합니다.
-- `expo-camera`를 통해 카메라의 type, zoom, ratio, whiteBalance등을 설정합니다.
+- Photos can be searched by caption (e.g., food).
+- Users can upload photos from their phone's album or take new photos using the camera.
+- expo-media-library is used to set access permissions for the media library.
+- expo-camera is used to configure camera settings such as type, zoom, ratio, and white balance.
   <br /><br />
   <img height="700" src="./previews/16.gif" />
   <img height="700" src="./previews/17.gif" />
 
 > 15. 기타
 
-- `Front-end`는 `Netlify`에, `Back-end`는 `Heroku`에 배포하였습니다.
-- `Database`는 `Heroku PostgreSQL`에 배포하였습니다.
-- `GraphQL Code Generator`를 이용해 `GraphQL Schema`로부터 타입 및 코드를 생성하였습니다.
-- `Front-end`: https://github.com/GitHubGW/instagram-frontend
-- `Back-end`: https://github.com/GitHubGW/instagram-backend
-- `App`: https://github.com/GitHubGW/instagram-app
+- The Front-end will be deployed on Netlify, and the Back-end is deployed on Heroku.
+- The Database will be deployed on Heroku PostgreSQL.
+- GraphQL Code Generator is used to generate types and code from the GraphQL Schema.
+- `Front-end`: https://github.com/hoiwonkim/kidsgram-app
+- `Back-end`: https://github.com/hoiwonkim/kidsgram-backend
+
 
 ## Pages
 
